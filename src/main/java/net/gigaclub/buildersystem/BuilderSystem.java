@@ -109,6 +109,24 @@ public class BuilderSystem {
     // 2: User is not manager
     // 1: User is not user of this team
     // 0: Success
+    public int addMember(String playerUUID, String playerUUIDtoAdd) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "add_member", Arrays.asList(playerUUID, playerUUIDtoAdd)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 4;
+    }
+
+    // Status Codes:
+    // 4: Other error
+    // 3: Team does not exist
+    // 2: User is not manager
+    // 1: User is not user of this team
+    // 0: Success
     public int kickMember(String playerUUID, String playerUUIDtoKick) {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
