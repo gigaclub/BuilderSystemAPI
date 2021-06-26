@@ -4,6 +4,8 @@ import net.gigaclub.base.odoo.Odoo;
 import org.apache.xmlrpc.XmlRpcException;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BuilderSystem {
 
@@ -177,6 +179,200 @@ public class BuilderSystem {
             e.printStackTrace();
         }
         return 6;
+    }
+
+    public Map<String, String> getTeamNameByMember(String playerUUID) {
+        try {
+            return (Map<String, String>) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "get_team_by_member", Arrays.asList(playerUUID)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object[] getAllTeams() {
+        try {
+            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "get_all_teams", Arrays.asList()
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object getTeam(String name) {
+        try {
+            return this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "get_team", Arrays.asList(name)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int createTask(String name) {
+        return this.odoo.create("gc.builder.task", Arrays.asList(new HashMap<>() {{
+            put("name", name);
+        }}));
+    }
+
+    public int createTask(String name, String description) {
+        return this.odoo.create("gc.builder.task", Arrays.asList(new HashMap<>() {{
+            put("name", name);
+            put("description", description);
+        }}));
+    }
+
+    public void removeTask(int id) {
+        this.odoo.unlink("gc.builder.task", Arrays.asList(Arrays.asList(Arrays.asList("id", "=", id))));
+    }
+
+    public void editTaskName(int id, String newName) {
+        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+            put("name", newName);
+        }}));
+    }
+
+    public void editTaskDescription(int id, String newDescription) {
+        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+            put("description", newDescription);
+        }}));
+    }
+
+    public void editTask(int id, String newName, String newDescription) {
+        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+            put("name", newName);
+            put("description", newDescription);
+        }}));
+    }
+
+    public int createWorldAsUser(String playerUUID, int taskID, String name) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "create_as_user", Arrays.asList(playerUUID, taskID, name)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int createWorldAsTeam(String playerUUID, int taskID, String name) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "create_as_team", Arrays.asList(playerUUID, taskID, name)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    // Status Codes:
+    // 3: Other Error
+    // 2: World does not exist
+    // 1: User has no manager access to this world
+    // 0: Success
+    public int addUserToWorld(String playerUUID, String playerUUIDToAdd, int worldID) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "add_user_to_world", Arrays.asList(playerUUID, playerUUIDToAdd, worldID)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 3;
+    }
+
+    // Status Codes:
+    // 4: Other error
+    // 3: World does not exist
+    // 2: User has no manager access to this world
+    // 1: Team does not exist
+    // 0: Success
+    public int addTeamToWorld(String playerUUID, String teamName, int worldID) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "add_team_to_world", Arrays.asList(playerUUID, teamName, worldID)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 4;
+    }
+
+    // Status Codes:
+    // 3: Other error
+    // 2: World does not exist
+    // 1: User has no manager access to this world
+    // 0: Success
+    public int removeUserFromWorld(String playerUUID, String playerUUIDToRemove, int worldID) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "remove_user_from_world", Arrays.asList(playerUUID, playerUUIDToRemove, worldID)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 4;
+    }
+
+    // Status Codes:
+    // 4: Other error
+    // 3: World does not exist
+    // 2: User has no manager access to this world
+    // 1: Team does not exist
+    // 0: Success
+    public int removeTeamFromWorld(String playerUUID, String teamName, int worldID) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "remove_team_from_world", Arrays.asList(playerUUID, teamName, worldID)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 4;
+    }
+
+    // Status Codes:
+    // 2: Other error
+    // 1: World does not exist
+    // 0: Success
+    public int saveWorld(int worldID, String worldData) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "save_world", Arrays.asList(worldID, worldData)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 2;
+    }
+
+    public String getWorldData(int worldID) {
+        try {
+            return (String) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "get_world_data", Arrays.asList(worldID)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
