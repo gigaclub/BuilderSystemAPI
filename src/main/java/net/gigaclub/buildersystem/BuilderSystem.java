@@ -253,6 +253,30 @@ public class BuilderSystem {
         }}));
     }
 
+    public Object[] getAllTasks() {
+        try {
+            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "get_all_tasks", Arrays.asList()
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object getTask(int id) {
+        try {
+            return this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.task", "get_task", Arrays.asList(id)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public int createWorldAsUser(String playerUUID, int taskID, String name) {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
@@ -368,6 +392,30 @@ public class BuilderSystem {
             return (String) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.builder.world", "get_world_data", Arrays.asList(worldID)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object[] getAllWorlds() {
+        try {
+            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "get_all_worlds", Arrays.asList()
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object getWorld(int id) {
+        try {
+            return this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "get_world", Arrays.asList(id)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
