@@ -257,7 +257,7 @@ public class BuilderSystem {
         try {
             return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "get_all_tasks", Arrays.asList()
+                    "gc.builder.task", "get_all_tasks", Arrays.asList()
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();

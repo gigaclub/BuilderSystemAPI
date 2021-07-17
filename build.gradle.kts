@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.gigaclub"
-version = "14.0.1.0.0"
+version = "14.0.1.0.1"
 
 val myArtifactId: String = rootProject.name
 val myArtifactGroup: String = project.group.toString()
@@ -31,7 +31,7 @@ repositories {
         }
         credentials {
             username = System.getenv("GITHUB_PACKAGES_USERID")
-            password = System.getenv("GITHUB_PACKAGES_PUBLISH_TOKEN")
+            password = System.getenv("GITHUB_PACKAGES_IMPORT_TOKEN")
         }
     }
 }
@@ -55,7 +55,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/${myGithubUsername}/${myArtifactId}")
             credentials {
                 username = System.getenv("GITHUB_PACKAGES_USERID")
-                password = System.getenv("GITHUB_PACKAGES_PUBLISH_TOKEN")
+                password = System.getenv("GITHUB_PACKAGES_IMPORT_TOKEN")
             }
         }
     }
