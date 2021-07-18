@@ -277,11 +277,11 @@ public class BuilderSystem {
         return null;
     }
 
-    public int createWorldAsUser(String playerUUID, int taskID, String name) {
+    public int createWorldAsUser(String playerUUID, int taskID, String name, String world_type) {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.world", "create_as_user", Arrays.asList(playerUUID, taskID, name)
+                    "gc.builder.world", "create_as_user", Arrays.asList(playerUUID, taskID, name, world_type)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -289,11 +289,11 @@ public class BuilderSystem {
         return 0;
     }
 
-    public int createWorldAsTeam(String playerUUID, int taskID, String name) {
+    public int createWorldAsTeam(String playerUUID, int taskID, String name, String world_type) {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.world", "create_as_team", Arrays.asList(playerUUID, taskID, name)
+                    "gc.builder.world", "create_as_team", Arrays.asList(playerUUID, taskID, name, world_type)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -387,6 +387,22 @@ public class BuilderSystem {
         return 2;
     }
 
+    // Status Codes:
+    // 2: Other error
+    // 1: World does not exist
+    // 0: Success
+    public int editWorldType(int worldID, String worldType) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world", "edit_world_type", Arrays.asList(worldID, worldType)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 2;
+    }
+
     public String getWorldData(int worldID) {
         try {
             return (String) this.odoo.getModels().execute("execute_kw", Arrays.asList(
@@ -416,6 +432,18 @@ public class BuilderSystem {
             return this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.builder.world", "get_world", Arrays.asList(id)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object[] getAllWorldTypes() {
+        try {
+            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.world.type", "get_all_world_types", Arrays.asList()
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
