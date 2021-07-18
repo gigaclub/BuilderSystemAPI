@@ -230,6 +230,15 @@ public class BuilderSystem {
         }}));
     }
 
+    public int createTask(String name, String description, int buildWidth, int buildLength) {
+        return this.odoo.create("gc.builder.task", Arrays.asList(new HashMap<>() {{
+            put("name", name);
+            put("description", description);
+            put("build_width", buildWidth);
+            put("build_length", buildLength);
+        }}));
+    }
+
     public void removeTask(int id) {
         this.odoo.unlink("gc.builder.task", Arrays.asList(Arrays.asList(Arrays.asList("id", "=", id))));
     }
@@ -246,10 +255,24 @@ public class BuilderSystem {
         }}));
     }
 
-    public void editTask(int id, String newName, String newDescription) {
+    public void editTaskBuildWidth(int id, int newBuildWidth) {
+        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+            put("build_width", newBuildWidth);
+        }}));
+    }
+
+    public void editTaskBuildLength(int id, int newBuildLength) {
+        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+            put("build_length", newBuildLength);
+        }}));
+    }
+
+    public void editTask(int id, String newName, String newDescription, int newBuildWidth, int newBuildLength) {
         this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
             put("name", newName);
             put("description", newDescription);
+            put("build_width", newBuildWidth);
+            put("build_length", newBuildLength);
         }}));
     }
 
