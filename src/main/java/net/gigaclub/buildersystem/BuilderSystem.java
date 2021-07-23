@@ -127,6 +127,58 @@ public class BuilderSystem {
     // 4: Other error
     // 3: Team does not exist
     // 2: User is not manager
+    // 1: User is already member of this team
+    // 0: Success
+    public int inviteMember(String playerUUID, String playerUUIDtoInvite) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "invite_member", Arrays.asList(playerUUID, playerUUIDtoInvite)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 4;
+    }
+
+    // Status Codes:
+    // 3: Other error
+    // 2: Team does not exist
+    // 1: Request does not exist
+    // 0: Success
+    public int acceptRequest(String playerUUID, String teamName) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "accept_request", Arrays.asList(playerUUID, teamName)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 3;
+    }
+
+    // Status Codes:
+    // 3: Other error
+    // 2: Team does not exist
+    // 1: Request does not exist
+    // 0: Success
+    public int denyRequest(String playerUUID, String teamName) {
+        try {
+            return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.builder.team", "deny_request", Arrays.asList(playerUUID, teamName)
+            ));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return 3;
+    }
+
+    // Status Codes:
+    // 4: Other error
+    // 3: Team does not exist
+    // 2: User is not manager
     // 1: User is not user of this team
     // 0: Success
     public int kickMember(String playerUUID, String playerUUIDtoKick) {
