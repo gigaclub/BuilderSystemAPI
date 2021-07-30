@@ -25,7 +25,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "create_team", Arrays.asList(playerUUID, name)
+                    "gc.team", "create_team", Arrays.asList(playerUUID, name)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "create_team", Arrays.asList(playerUUID, name, description)
+                    "gc.team", "create_team", Arrays.asList(playerUUID, name, description)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "edit_team", Arrays.asList(playerUUID, name, newName)
+                    "gc.team", "edit_team", Arrays.asList(playerUUID, name, newName)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -81,7 +81,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "edit_team", Arrays.asList(playerUUID, name, newName, newDescription)
+                    "gc.team", "edit_team", Arrays.asList(playerUUID, name, newName, newDescription)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -97,7 +97,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "leave_team", Arrays.asList(playerUUID)
+                    "gc.team", "leave_team", Arrays.asList(playerUUID)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -115,7 +115,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "add_member", Arrays.asList(playerUUID, playerUUIDtoAdd)
+                    "gc.team", "add_member", Arrays.asList(playerUUID, playerUUIDtoAdd)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -133,7 +133,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "invite_member", Arrays.asList(playerUUID, playerUUIDtoInvite)
+                    "gc.team", "invite_member", Arrays.asList(playerUUID, playerUUIDtoInvite)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -150,7 +150,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "accept_request", Arrays.asList(playerUUID, teamName)
+                    "gc.team", "accept_request", Arrays.asList(playerUUID, teamName)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -167,7 +167,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "deny_request", Arrays.asList(playerUUID, teamName)
+                    "gc.team", "deny_request", Arrays.asList(playerUUID, teamName)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -185,7 +185,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "kick_member", Arrays.asList(playerUUID, playerUUIDtoKick)
+                    "gc.team", "kick_member", Arrays.asList(playerUUID, playerUUIDtoKick)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -205,7 +205,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "promote_member", Arrays.asList(playerUUID, playerUUIDtoPromote)
+                    "gc.team", "promote_member", Arrays.asList(playerUUID, playerUUIDtoPromote)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -225,7 +225,7 @@ public class BuilderSystem {
         try {
             return (int) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "demote_member", Arrays.asList(playerUUID, playerUUIDtoDemote)
+                    "gc.team", "demote_member", Arrays.asList(playerUUID, playerUUIDtoDemote)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -237,7 +237,7 @@ public class BuilderSystem {
         try {
             return (Map<String, String>) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "get_team_by_member", Arrays.asList(playerUUID)
+                    "gc.team", "get_team_by_member", Arrays.asList(playerUUID)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -249,7 +249,7 @@ public class BuilderSystem {
         try {
             return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "get_all_teams", Arrays.asList()
+                    "gc.team", "get_all_teams", Arrays.asList()
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -261,7 +261,7 @@ public class BuilderSystem {
         try {
             return this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.team", "get_team", Arrays.asList(name)
+                    "gc.team", "get_team", Arrays.asList(name)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
