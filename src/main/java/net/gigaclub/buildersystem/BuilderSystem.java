@@ -292,7 +292,7 @@ public class BuilderSystem {
     }
 
     public void removeTask(int id) {
-        this.odoo.unlink("gc.builder.task", Arrays.asList(Arrays.asList(Arrays.asList("id", "=", id))));
+        this.odoo.unlink("gc.builder.task", Arrays.asList(Arrays.asList(id)));
     }
 
     public void editTaskName(int id, String newName) {
