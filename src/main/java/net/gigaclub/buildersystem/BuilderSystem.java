@@ -270,20 +270,20 @@ public class BuilderSystem {
     }
 
     public int createTask(String name) {
-        return this.odoo.create("gc.builder.task", Arrays.asList(new HashMap<>() {{
+        return this.odoo.create("project.task", Arrays.asList(new HashMap<>() {{
             put("name", name);
         }}));
     }
 
     public int createTask(String name, String description) {
-        return this.odoo.create("gc.builder.task", Arrays.asList(new HashMap<>() {{
+        return this.odoo.create("project.task", Arrays.asList(new HashMap<>() {{
             put("name", name);
             put("description", description);
         }}));
     }
 
     public int createTask(String name, String description, int buildWidth, int buildLength) {
-        return this.odoo.create("gc.builder.task", Arrays.asList(new HashMap<>() {{
+        return this.odoo.create("project.task", Arrays.asList(new HashMap<>() {{
             put("name", name);
             put("description", description);
             put("build_width", buildWidth);
@@ -292,35 +292,35 @@ public class BuilderSystem {
     }
 
     public void removeTask(int id) {
-        this.odoo.unlink("gc.builder.task", Arrays.asList(Arrays.asList(id)));
+        this.odoo.unlink("project.task", Arrays.asList(Arrays.asList(id)));
     }
 
     public void editTaskName(int id, String newName) {
-        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+        this.odoo.write("project.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
             put("name", newName);
         }}));
     }
 
     public void editTaskDescription(int id, String newDescription) {
-        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+        this.odoo.write("project.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
             put("description", newDescription);
         }}));
     }
 
     public void editTaskBuildWidth(int id, int newBuildWidth) {
-        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+        this.odoo.write("project.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
             put("build_width", newBuildWidth);
         }}));
     }
 
     public void editTaskBuildLength(int id, int newBuildLength) {
-        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+        this.odoo.write("project.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
             put("build_length", newBuildLength);
         }}));
     }
 
     public void editTask(int id, String newName, String newDescription, int newBuildWidth, int newBuildLength) {
-        this.odoo.write("gc.builder.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
+        this.odoo.write("project.task", Arrays.asList(Arrays.asList(id), new HashMap<>() {{
             put("name", newName);
             put("description", newDescription);
             put("build_width", newBuildWidth);
@@ -332,7 +332,7 @@ public class BuilderSystem {
         try {
             return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.task", "get_all_tasks", Arrays.asList()
+                    "project.task", "get_all_tasks", Arrays.asList()
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
@@ -344,7 +344,7 @@ public class BuilderSystem {
         try {
             return this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
-                    "gc.builder.task", "get_task", Arrays.asList(id)
+                    "project.task", "get_task", Arrays.asList(id)
             ));
         } catch (XmlRpcException e) {
             e.printStackTrace();
