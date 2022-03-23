@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.gigaclub"
-version = "14.0.1.0.6"
+version = "14.0.1.0.7"
 
 val myArtifactId: String = rootProject.name
 val myArtifactGroup: String = project.group.toString()
@@ -16,8 +16,8 @@ val myGithubIssueTrackerUrl = "https://github.com/${myGithubUsername}/${myArtifa
 val myLicense = "MIT"
 val myLicenseUrl = "https://opensource.org/licenses/MIT"
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_16
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 repositories {
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    api("net.gigaclub:baseapi:14.0.1.0.2")
+    api("net.gigaclub:baseapi:14.0.1.0.3")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {

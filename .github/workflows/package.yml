@@ -1,0 +1,25 @@
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: ["14.0"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: "17"
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        env:
+          GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
+        run: echo $GRADLE_PROPERTIES | base64 -d > ./gradle.properties && cat ./gradle.properties && ./gradlew build
+      - name: publish
+        run: ./gradlew publish
