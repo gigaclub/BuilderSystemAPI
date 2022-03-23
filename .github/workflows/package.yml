@@ -15,11 +15,8 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: "17"
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: Build with Gradle
+      - name: Publish package
+        run: gradle publish
         env:
-          GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
-        run: echo $GRADLE_PROPERTIES | base64 -d > ./gradle.properties && cat ./gradle.properties && ./gradlew build
-      - name: publish
-        run: ./gradlew publish
+          GITHUB_PACKAGES_USERID: ${{ secrets.PACKAGES_USERID }}
+          GITHUB_PACKAGES_IMPORT_TOKEN: ${{ secrets.PACKAGES_IMPORT_TOKEN }}
