@@ -2,6 +2,8 @@ package net.gigaclub.buildersystem;
 
 import net.gigaclub.base.odoo.Odoo;
 import org.apache.xmlrpc.XmlRpcException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -233,36 +235,36 @@ public class BuilderSystem {
         return 6;
     }
 
-    public Map<String, String> getTeamNameByMember(String playerUUID) {
+    public JSONObject getTeamNameByMember(String playerUUID) {
         try {
-            return (Map<String, String>) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONObject((Map<String, String>) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.team", "get_team_by_member", Arrays.asList(playerUUID)
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Object[] getAllTeams() {
+    public JSONArray getAllTeams() {
         try {
-            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONArray(this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.team", "get_all_teams", Arrays.asList()
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Object getTeam(String name) {
+    public JSONObject getTeam(String name) {
         try {
-            return this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONObject((Map<String, String>) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.team", "get_team", Arrays.asList(name)
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
@@ -328,24 +330,24 @@ public class BuilderSystem {
         }}));
     }
 
-    public Object[] getAllTasks() {
+    public JSONArray getAllTasks() {
         try {
-            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONArray(this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "project.task", "get_all_tasks", Arrays.asList()
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Object getTask(int id) {
+    public JSONObject getTask(int id) {
         try {
-            return this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONObject((Map<String, String>) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "project.task", "get_task", Arrays.asList(id)
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
@@ -490,36 +492,36 @@ public class BuilderSystem {
         return null;
     }
 
-    public Object[] getAllWorlds() {
+    public JSONArray getAllWorlds() {
         try {
-            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONArray(this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.builder.world", "get_all_worlds", Arrays.asList()
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Object getWorld(int id) {
+    public JSONObject getWorld(int id) {
         try {
-            return this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONObject((Map<String, String>) this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.builder.world", "get_world", Arrays.asList(id)
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Object[] getAllWorldTypes() {
+    public JSONArray getAllWorldTypes() {
         try {
-            return (Object[]) this.odoo.getModels().execute("execute_kw", Arrays.asList(
+            return new JSONArray(this.odoo.getModels().execute("execute_kw", Arrays.asList(
                     this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
                     "gc.builder.world.type", "get_all_world_types", Arrays.asList()
-            ));
+            )));
         } catch (XmlRpcException e) {
             e.printStackTrace();
         }
