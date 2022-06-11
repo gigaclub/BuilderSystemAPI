@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.gigaclub"
-version = "14.0.1.0.8"
+version = "14.0.1.0.9"
 
 val myArtifactId: String = rootProject.name
 val myArtifactGroup: String = project.group.toString()
@@ -23,8 +23,8 @@ java {
 repositories {
     mavenCentral()
     maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/gigaclub/baseapi")
+        name = "GitHubPackagesTeam"
+        url = uri("https://maven.pkg.github.com/gigaclub/teamapi")
         metadataSources {
             mavenPom()
             artifact()
@@ -36,8 +36,9 @@ repositories {
     }
 }
 
+
 dependencies {
-    api("net.gigaclub:baseapi:14.0.1.0.3")
+    api("net.gigaclub:teamapi:14.0.1.0.1")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
