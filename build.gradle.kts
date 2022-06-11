@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.gigaclub"
-version = "14.0.1.0.7"
+version = "14.0.1.0.8"
 
 val myArtifactId: String = rootProject.name
 val myArtifactGroup: String = project.group.toString()
