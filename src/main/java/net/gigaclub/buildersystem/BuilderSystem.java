@@ -1,6 +1,6 @@
 package net.gigaclub.buildersystem;
 
-import net.gigaclub.base.odoo.Odoo;
+import net.gigaclub.teamapi.Team;
 import org.apache.xmlrpc.XmlRpcException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,12 +9,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuilderSystem {
+public class BuilderSystem extends Team {
 
-    private final Odoo odoo;
-
-    public BuilderSystem(String hostname, String database, String login, String password) {
-        this.odoo = new Odoo(hostname, database, login, password);
+    public BuilderSystem(String hostname, String database, String username, String password) {
+        super(hostname, database, username, password);
     }
 
     public int createTask(String name) {
