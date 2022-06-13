@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.gigaclub"
-version = "14.0.1.0.9"
+version = "14.0.1.0.10"
 
 val myArtifactId: String = rootProject.name
 val myArtifactGroup: String = project.group.toString()
@@ -38,7 +38,7 @@ repositories {
 
 
 dependencies {
-    api("net.gigaclub:teamapi:14.0.1.0.1")
+    api("net.gigaclub:teamapi:14.0.1.0.2")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {

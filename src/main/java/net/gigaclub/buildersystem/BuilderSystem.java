@@ -236,6 +236,30 @@ public class BuilderSystem extends Team {
         return null;
     }
 
+    public JSONArray getUserWorlds(String playerUUID) {
+        try {
+            return new JSONArray(this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.permission.connector", "get_user_worlds", Arrays.asList(playerUUID)
+            )));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public JSONArray getTeamWorlds(int teamId) {
+        try {
+            return new JSONArray(this.odoo.getModels().execute("execute_kw", Arrays.asList(
+                    this.odoo.getDatabase(), this.odoo.getUid(), this.odoo.getPassword(),
+                    "gc.permission.connector", "get_team_worlds", Arrays.asList(teamId)
+            )));
+        } catch (XmlRpcException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public JSONArray getAllWorlds() {
         try {
             return new JSONArray(this.odoo.getModels().execute("execute_kw", Arrays.asList(
